@@ -18,6 +18,7 @@ tableData.forEach(i=>{
 // getting a ref to the button
 var button = d3.select("button");
 
+// empty table function
 function deleteRows(){
     var table = document.getElementById("to-be-changed")
     while(table.rows.length > 0) {
@@ -25,7 +26,9 @@ function deleteRows(){
       }
 };
 
+// when the button is clicked
 button.on("click",function(){
+    // prevent from refreshing
     d3.event.preventDefault();
 
     var inputElement_datetime = d3.select("#datetime");
@@ -34,6 +37,7 @@ button.on("click",function(){
     var inputElement_country = d3.select("#country");
     var inputElement_shape = d3.select("#shape");
 
+    // getting the input values
     var inputValue_datetime = inputElement_datetime.property("value");
     var inputValue_city = inputElement_city.property("value").toLowerCase();
     var inputValue_state = inputElement_state.property("value").toLowerCase();
@@ -46,7 +50,7 @@ button.on("click",function(){
     console.log(inputValue_country);
     console.log(inputValue_shape);
 
-
+    // set up the filter condition
     var keys = ['datetime','city','state','country','shape'];
     var values = [inputValue_datetime,inputValue_city,inputValue_state,inputValue_country,inputValue_shape];
     var filter = {};
@@ -57,7 +61,8 @@ button.on("click",function(){
         };
     };
     console.log(filter);
-        
+    
+    // getting the filtered Data
     var filterData= tableData.filter(function(item) {
         for (var key in filter) {
           if (item[key] === undefined || item[key] != filter[key])
@@ -68,8 +73,10 @@ button.on("click",function(){
       
       console.log(filterData);
     
+    // empty the table before re-redering the data
     deleteRows();
 
+    // redering the filtered data
     filterData.forEach(i=>{
         var row = tBody.append("tr");
         Object.entries(i).forEach(([key,value])=>{

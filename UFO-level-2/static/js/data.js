@@ -998,10 +998,3 @@ var data = [{
     comments: "Bright orange object&#44 rapid speed and direction changes .."
   }
 ];
-
-// data.forEach(i=> {
-//   Object.entries(i).forEach(data=>{
-//     console.log(typeof data);
-//   });
-
-// });
